@@ -1,1 +1,4 @@
-﻿  SFMLConsoleApplication.vcxproj -> C:\Potatis INF\Unity Projects\ProgrameringsmetodikAsteroids\SFMLConsoleApplication\Debug\SFMLConsoleApplication.exe
+﻿  Game.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(90,17): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(196,35): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+  SFMLConsoleApplication.vcxproj -> C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\Debug\SFMLConsoleApplication.exe

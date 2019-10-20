@@ -2,9 +2,9 @@
 #include "Game.h"
 #include "SFML/Graphics.hpp"
 #include "string.h"
-#include "Coin.h"
+#include "Bullet.h"
 #include "Player.h"
-#include "Asteroid.h"
+#include "Invader.h"
 #include <iostream>
 
 
@@ -15,28 +15,28 @@ using namespace std;
 //Settings
 namespace {
 	//Video
-	const string WINDOW_TITLE = "Asteroids";
+	const string WINDOW_TITLE = "Space Invaders";
 	const VideoMode VIDEO_MODE = VideoMode((768/2), (1024/2));
 	const Color BACKGROUND_COLOR = Color::Black;
 	const int FRAMERATE_LIMIT = 60;
 
 	//Radius
 	const int PLAYER_RADIUS = 30;
-	const int COIN_RADIUS = 15;
+	const int BULLET_RADIUS = 15;
 	const int ASTEROID_RADIUS = 15;
 
 	//Player
 	const float PLAYER_SPEED_BASE = 5;
 
 	//Coin
-	const float COIN_SPEED_BASE = 3;
+	const float BULLET_SPEED_BASE = 3;
 
 	//Asteroids
-	const float ASTEROID_BASE_SPEED = 5;
-	const float ASTEROID_SPEED_VARIANCE = 2;
-	float asteroid_spawn_rate = 1;
-	const float ASTEROID_ACCELERATION_RATE = 0.1f;
-	const float ASTEROID_SPAWN_RATE_MAX = 20/2;
+	const float INVADER_BASE_SPEED = 5;
+	const float INVADER_SPEED_VARIANCE = 2;
+	float invader_spawn_rate = 1;
+	const float INVADER_ACCELERATION_RATE = 0.1f;
+	const float INVADER_SPAWN_RATE_MAX = 20/2;
 }
 #pragma endregion
 
@@ -51,9 +51,9 @@ float RandomNumberRange(float Min, float Max)
 
 Game::Game() :
 	gameWindow(VIDEO_MODE, WINDOW_TITLE, Style::Titlebar | Style::Close),
-	playerTexture(LoadTextureFromPath("ShipSprite.psd")),
-	asteroidTexture(LoadTextureFromPath("AsteroidSprite.psd")),
-	coinTexture(LoadTextureFromPath("CoinSprite.psd")),
+	playerTexture(LoadTextureFromPath("PlayerTexture.psd")),
+	invaderTexture(LoadTextureFromPath("InvaderTexture.psd")),
+	bulletTexture(LoadTextureFromPath("BulletTexture.psd")),
 	gameIsOver(false),
 	entityList(),
 	asteroidTimer(0)
@@ -69,6 +69,10 @@ Game::~Game()
 		delete entityList.back();
 		entityList.pop_back();
 	}
+
+	delete playerTexture;
+	delete invaderTexture;
+	delete bulletTexture;
 }
 ;
 
@@ -77,10 +81,10 @@ void Game::Run()
 {
 	//Create essential entities
 	Player* player = new Player(VIDEO_MODE.width/2, VIDEO_MODE.height/2, VIDEO_MODE.width, VIDEO_MODE.height, PLAYER_RADIUS, "Player", PLAYER_SPEED_BASE, playerTexture);
-	Coin* coin = new Coin(VIDEO_MODE.width / 2, 0, VIDEO_MODE.width, VIDEO_MODE.height, COIN_RADIUS, "Coin", COIN_SPEED_BASE, coinTexture);
+	Bullet* bullet = new Bullet(VIDEO_MODE.width / 2, 0, VIDEO_MODE.width, VIDEO_MODE.height, BULLET_RADIUS, "Coin", BULLET_SPEED_BASE, bulletTexture);
 
 	entityList.push_back(player);
-	entityList.push_back(coin);
+	entityList.push_back(bullet);
 
 	//Ranomizer seed
 	srand(std::time(NULL));
@@ -102,7 +106,7 @@ void Game::Run()
 		}
 
 		//Create, handle, draw, and clean
-		AsteroidSpawner(deltaTime);
+		InvaderSpawner(deltaTime);
 		EntityUpdate();
 		EntityRender();
 		CollisionManagement();
@@ -111,7 +115,7 @@ void Game::Run()
 		gameWindow.display();
 
 		//End game?
-		if (CheckGameOverState(player, coin))
+		if (CheckGameOverState(player, bullet))
 		{
 			gameIsOver = true;
 		}
@@ -200,10 +204,10 @@ void Game::CollisionManagement()
 	}
 }
 
-void Game::AsteroidSpawner(float deltaTime)
+void Game::InvaderSpawner(float deltaTime)
 {
 	//Spawn as many asteroids/s as the spawn rate allows
-	if (asteroidTimer >= (1 / asteroid_spawn_rate)) 
+	if (asteroidTimer >= (1 / invader_spawn_rate)) 
 	{
 		//Reset timer
 		asteroidTimer = 0;
@@ -215,13 +219,13 @@ void Game::AsteroidSpawner(float deltaTime)
 		int _boundryX = VIDEO_MODE.width + ASTEROID_RADIUS;
 		int _boundryY = VIDEO_MODE.height + ASTEROID_RADIUS;
 
-		float _speedVariance = RandomNumberRange((-1 * ASTEROID_SPEED_VARIANCE), ASTEROID_SPEED_VARIANCE);
-		float _speed = ASTEROID_BASE_SPEED + _speedVariance;
+		float _speedVariance = RandomNumberRange((-1 * INVADER_SPEED_VARIANCE), INVADER_SPEED_VARIANCE);
+		float _speed = INVADER_BASE_SPEED + _speedVariance;
 
-		Asteroid* _asteroid = new Asteroid(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Asteroid", _speed, asteroidTexture);
+		Invader* _invader = new Invader(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Asteroid", _speed, invaderTexture);
 
 
-		entityList.push_back(_asteroid);
+		entityList.push_back(_invader);
 	}
 	else
 	{
@@ -229,11 +233,11 @@ void Game::AsteroidSpawner(float deltaTime)
 	}
 
 	//Increase spawn rate
-	if (asteroid_spawn_rate <= ASTEROID_SPAWN_RATE_MAX) asteroid_spawn_rate += (ASTEROID_ACCELERATION_RATE * deltaTime);
+	if (invader_spawn_rate <= INVADER_SPAWN_RATE_MAX) invader_spawn_rate += (INVADER_ACCELERATION_RATE * deltaTime);
 }
 
 //Returns true if the game should end (player or coin is dead)
-bool Game::CheckGameOverState(Player* plyr, Coin* cn) 
+bool Game::CheckGameOverState(Player* plyr, Bullet* cn) 
 {
 	bool _output = false;
 

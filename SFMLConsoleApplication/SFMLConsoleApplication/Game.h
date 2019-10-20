@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include <vector>
 #include "Player.h"
-#include "Coin.h"
+#include "Bullet.h"
 
 typedef std::vector<Entity*> EntityVector;
 
@@ -15,9 +15,9 @@ public:
 	void Run();
 
 private:
-	bool CheckGameOverState(Player* plyr, Coin* cn);
+	bool CheckGameOverState(Player* plyr, Bullet* cn);
 	void CollisionManagement();
-	void AsteroidSpawner(float deltaTime);
+	void InvaderSpawner(float deltaTime);
 	void EntityUpdate();
 	void EntityRender();
 	void EntityCleaner();
@@ -25,8 +25,8 @@ private:
 	sf::Texture* LoadTextureFromPath(std::string path);
 
 	sf::Texture* playerTexture;
-	sf::Texture* asteroidTexture;
-	sf::Texture* coinTexture;
+	sf::Texture* invaderTexture;
+	sf::Texture* bulletTexture;
 
 	sf::RenderWindow gameWindow;
 	bool gameIsOver;
