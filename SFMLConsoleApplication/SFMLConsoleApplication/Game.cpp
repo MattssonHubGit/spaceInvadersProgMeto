@@ -107,7 +107,7 @@ void Game::Run()
 
 		//Create, handle, draw, and clean
 		InvaderSpawner(deltaTime);
-		EntityUpdate();
+		EntityUpdate(deltaTime);
 		EntityRender();
 		CollisionManagement();
 		EntityCleaner();
@@ -136,11 +136,11 @@ Texture* Game::LoadTextureFromPath(string path)
 }
 
 //Update entities (OBS - not based on deltaTime)
-void Game::EntityUpdate()
+void Game::EntityUpdate(float deltaTime)
 {
 	for each (Entity* ent in entityList)
 	{
-		ent->Update();
+		ent->Update(deltaTime);
 	}
 }
 

@@ -5,14 +5,13 @@
 using namespace sf;
 using namespace std;
 
-Bullet::Bullet(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId)
+Bullet::Bullet(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = iniBoundryX;
 	boundryY = iniBoundryY;
 	taken = false;
 	dirY = 1; //1 == down, -1 == up
-	ReadyGFX(texture);
 };
 
 Bullet::~Bullet()
@@ -20,7 +19,7 @@ Bullet::~Bullet()
 	UnloadGFX();
 }
 
-void Bullet::MovementManagement()
+void Bullet::MovementManagement(float deltaTime)
 {
 	//Move downwards
 	//If below bottom while taken == false, coin dies (game ends)
@@ -46,23 +45,6 @@ void Bullet::OnCollision(std::string CollisionId)
 	}
 }
 
-void Bullet::ReadyGFX(sf::Texture* texture)
-{
-	//Set up a sprite with the provided texture and center it's origin
-
-	mySprite = new Sprite();
-	mySprite->setTexture(*texture);
-
-	float centerX = (mySprite->getLocalBounds().width / 2);
-	float centerY = (mySprite->getLocalBounds().height / 2);
-
-	mySprite->setOrigin(centerX, centerY);
-}
-
-void Bullet::UnloadGFX()
-{
-	delete mySprite;
-}
 
 void Bullet::Teleport()
 {
@@ -70,12 +52,8 @@ void Bullet::Teleport()
 	posY = (0 - (radius / 2) - boundryY);
 }
 
-void Bullet::Update()
+void Bullet::Update(float deltaTime)
 {
-	MovementManagement();
+	MovementManagement(deltaTime);
 }
 
-void Bullet::Render(RenderWindow& renderWindow)
-{
-	renderWindow.draw(*mySprite);
-}

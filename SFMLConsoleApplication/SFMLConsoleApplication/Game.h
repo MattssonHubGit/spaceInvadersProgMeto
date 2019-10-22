@@ -18,7 +18,7 @@ private:
 	bool CheckGameOverState(Player* plyr, Bullet* cn);
 	void CollisionManagement();
 	void InvaderSpawner(float deltaTime);
-	void EntityUpdate();
+	void EntityUpdate(float deltaTime);
 	void EntityRender();
 	void EntityCleaner();
 	void WindowsEventManager();

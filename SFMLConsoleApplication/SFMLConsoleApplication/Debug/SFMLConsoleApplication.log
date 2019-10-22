@@ -1,4 +1,16 @@
-﻿  Game.cpp
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(90,17): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(196,35): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Bullet.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Bullet.cpp(29,27): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Bullet.cpp(30,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Bullet.cpp(30,24): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Bullet.cpp(52,27): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(56,29): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(57,29): warning C4244:  '+=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(60,57): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(61,57): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(62,42): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(63,42): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(66,30): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(66,24): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
   SFMLConsoleApplication.vcxproj -> C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\Debug\SFMLConsoleApplication.exe

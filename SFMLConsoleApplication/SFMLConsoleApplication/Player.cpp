@@ -5,7 +5,7 @@
 using namespace sf;
 using namespace std;
 
-Player::Player(int iniX, int iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture) : Entity(iniX, iniY, iniRad, colId) 
+Player::Player(int iniX, int iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = boundX;
@@ -26,7 +26,7 @@ void Player::OnCollision(std::string CollisionId)
 	}
 }
 
-void Player::MovementManagement() 
+void Player::MovementManagement(float deltaTime) 
 {
 	//Input
 	int _xInput = 0;
@@ -66,30 +66,10 @@ void Player::MovementManagement()
 	mySprite->setPosition(posX, posY);
 }
 
-void Player::ReadyGFX(sf::Texture *texture) 
+
+void Player::Update(float deltaTime)
 {
-	//Set up a sprite with the provided texture and center it's origin
-
-	mySprite = new Sprite();
-	mySprite->setTexture(*texture);
-
-	float centerX = (mySprite->getLocalBounds().width / 2);
-	float centerY = (mySprite->getLocalBounds().height / 2);
-
-	mySprite->setOrigin(centerX, centerY);
+	MovementManagement(deltaTime);
 }
 
-void Player::UnloadGFX() 
-{
-	delete mySprite;
-}
 
-void Player::Update() 
-{
-	MovementManagement();
-}
-
-void Player::Render(RenderWindow &renderWindow) 
-{
-	renderWindow.draw(*mySprite);
-}

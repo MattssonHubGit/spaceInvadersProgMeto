@@ -1,13 +1,12 @@
 #pragma once
 #include "Invader.h"
 
-Invader::Invader(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId)
+Invader::Invader(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = iniBoundryX;
 	boundryY = iniBoundryY;
 	dirY = 1; //1 == down, -1 == up
-	ReadyGFX(texture);
 };
 
 Invader::~Invader() 
@@ -15,25 +14,7 @@ Invader::~Invader()
 	UnloadGFX();
 }
 
-void Invader::ReadyGFX(sf::Texture* texture)
-{
-	//Set up a sprite with the provided texture and center it's origin
-
-	mySprite = new sf::Sprite();
-	mySprite->setTexture(*texture);
-
-	float centerX = (mySprite->getLocalBounds().width / 2);
-	float centerY = (mySprite->getLocalBounds().height / 2);
-
-	mySprite->setOrigin(centerX, centerY);
-}
-
-void Invader::UnloadGFX()
-{
-	delete mySprite;
-}
-
-void Invader::MovementManagement() 
+void Invader::MovementManagement(float deltaTime) 
 {
 	//Move downwards
 	//If below bottom while taken == false, asteroid dies
@@ -49,15 +30,11 @@ void Invader::MovementManagement()
 	}
 }
 
-void Invader::Update()
+void Invader::Update(float deltaTime)
 {
-	MovementManagement();
+	MovementManagement(deltaTime);
 }
 
-void Invader::Render(sf::RenderWindow& renderWindow)
-{
-	renderWindow.draw(*mySprite);
-}
 
 void Invader::OnCollision(std::string CollisionId) 
 {
