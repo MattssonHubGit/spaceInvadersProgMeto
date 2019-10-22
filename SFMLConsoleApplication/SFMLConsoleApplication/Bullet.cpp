@@ -26,7 +26,7 @@ void Bullet::MovementManagement(float deltaTime)
 
 	int _dirY = dirY;
 
-	posY += _dirY * moveSpeed;
+	posY += (_dirY * moveSpeed) * deltaTime;
 	mySprite->setPosition(posX, posY);
 
 	if (posY > (boundryY + radius)) 

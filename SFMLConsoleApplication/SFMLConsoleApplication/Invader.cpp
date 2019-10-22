@@ -7,6 +7,7 @@ Invader::Invader(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float ini
 	boundryX = iniBoundryX;
 	boundryY = iniBoundryY;
 	dirY = 1; //1 == down, -1 == up
+	dirX = 1; //1 == right, -1 == left
 };
 
 Invader::~Invader() 
@@ -17,13 +18,23 @@ Invader::~Invader()
 void Invader::MovementManagement(float deltaTime) 
 {
 	//Move downwards
-	//If below bottom while taken == false, asteroid dies
+	//If touch side, invert dirX
+	//If below bottom, invader dies
 
 	int _dirY = dirY;
 
-	posY += _dirY * moveSpeed;
+	//Sides
+	if (posX > (boundryX + (radius / 2))) dirX = -1;
+	if (posX < 0 + (radius / 2)) dirX = 1;
+
+	int _dirX = dirX;
+
+	//Apply movement
+	posY += (_dirY * moveSpeed) * deltaTime;
+	posX += (_dirX * moveSpeed) * deltaTime;
 	mySprite->setPosition(posX, posY);
 
+	//Check below screen
 	if (posY > (boundryY + (radius / 2)))
 	{
 		markedDead = true;

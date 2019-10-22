@@ -20,11 +20,12 @@ Player::~Player()
 
 void Player::OnCollision(std::string CollisionId) 
 {
-	if (CollisionId == "Asteroid") 
+	if (CollisionId == "Invader") 
 	{
 		markedDead = true;
 	}
 }
+
 
 void Player::MovementManagement(float deltaTime) 
 {
@@ -53,8 +54,8 @@ void Player::MovementManagement(float deltaTime)
 	}
 
 	//Output
-	posX += _xInput * moveSpeed;
-	posY += _yInput * moveSpeed;
+	posX += (_xInput * moveSpeed) * deltaTime;
+	posY += (_yInput * moveSpeed) * deltaTime;
 
 	//Boundries
 	if (posX > (boundryX - (radius / 2))) posX = (boundryX - (radius / 2));

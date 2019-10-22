@@ -13,6 +13,7 @@ public:
 private:
 	float moveSpeed;
 	int dirY;
+	int dirX;
 	int boundryX;
 	int boundryY;
 	void MovementManagement(float deltaTime) override;

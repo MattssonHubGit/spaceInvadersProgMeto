@@ -33,4 +33,7 @@ private:
 	float asteroidTimer;
 
 	EntityVector entityList;
+
+	void PlayerBulletHandler(Player* plyr);
+	void InvaderBulletHandler();
 };

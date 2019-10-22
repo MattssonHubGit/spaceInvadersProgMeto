@@ -7,8 +7,8 @@ class Entity
 public: 
 	Entity(int iniX, int iniY, float iniRadius, std::string colId, sf::Texture* texture);
 	~Entity();
-	int posX;
-	int posY;
+	float posX;
+	float posY;
 	float radius;
 	bool markedDead;
 	std::string CollisionId;

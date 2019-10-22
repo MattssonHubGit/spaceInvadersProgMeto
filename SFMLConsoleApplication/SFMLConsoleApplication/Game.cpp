@@ -26,14 +26,13 @@ namespace {
 	const int ASTEROID_RADIUS = 15;
 
 	//Player
-	const float PLAYER_SPEED_BASE = 5;
+	const float PLAYER_SPEED_BASE = 200;
 
 	//Coin
-	const float BULLET_SPEED_BASE = 3;
+	const float BULLET_SPEED_BASE = 150;
 
 	//Asteroids
-	const float INVADER_BASE_SPEED = 5;
-	const float INVADER_SPEED_VARIANCE = 2;
+	const float INVADER_SPEED = 200;
 	float invader_spawn_rate = 1;
 	const float INVADER_ACCELERATION_RATE = 0.1f;
 	const float INVADER_SPAWN_RATE_MAX = 20/2;
@@ -99,11 +98,20 @@ void Game::Run()
 		WindowsEventManager();
 		gameWindow.clear(BACKGROUND_COLOR);
 
-		//Debugging
+#pragma region Debugging
+		//---End on F
 		if (Keyboard::isKeyPressed(Keyboard::F))
 		{
 			gameIsOver = true;
 		}
+
+		//---deltaTime
+		//cout << deltaTime << endl;
+
+#pragma endregion
+
+
+
 
 		//Create, handle, draw, and clean
 		InvaderSpawner(deltaTime);
@@ -154,17 +162,20 @@ void Game::EntityRender()
 }
 
 //Remove entities that have been marked for death
+	//ERROR: Removing one causes the list to fuck up for one cycle
 void Game::EntityCleaner() 
 {
-	
+	cout << entityList.size() << ": ";
 	for (EntityVector::size_type i = 0; i < entityList.size(); i++) 
 	{
+		cout << i << " ";
 		if (entityList[i]->markedDead)
 		{
 			delete entityList[i];
 			entityList.erase(entityList.begin() + i);
 		}
 	}
+	cout << endl;
 }
 
 //Close button
@@ -219,10 +230,9 @@ void Game::InvaderSpawner(float deltaTime)
 		int _boundryX = VIDEO_MODE.width + ASTEROID_RADIUS;
 		int _boundryY = VIDEO_MODE.height + ASTEROID_RADIUS;
 
-		float _speedVariance = RandomNumberRange((-1 * INVADER_SPEED_VARIANCE), INVADER_SPEED_VARIANCE);
-		float _speed = INVADER_BASE_SPEED + _speedVariance;
+		float _speed = INVADER_SPEED;
 
-		Invader* _invader = new Invader(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Asteroid", _speed, invaderTexture);
+		Invader* _invader = new Invader(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Invader", _speed, invaderTexture);
 
 
 		entityList.push_back(_invader);
@@ -249,4 +259,14 @@ bool Game::CheckGameOverState(Player* plyr, Bullet* cn)
 	return _output;
 }
 
+//When hitting space, spawn 3 bullets on the player
+void Game::PlayerBulletHandler(Player* plyr) 
+{
 
+}
+
+//Peroidically fire a bullet from each Invader
+void Game::InvaderBulletHandler() 
+{
+
+}
