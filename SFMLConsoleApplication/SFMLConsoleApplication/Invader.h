@@ -4,7 +4,7 @@
 class Invader : public Entity 
 {
 public:	
-	Invader(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture);
+	Invader(float iniX, float iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture, sf::Texture* textureExplosion, Game* game);
 	~Invader();
 
 	void OnCollision(std::string CollisionId) override;
@@ -16,6 +16,15 @@ private:
 	int dirX;
 	int boundryX;
 	int boundryY;
-	void MovementManagement(float deltaTime) override;
+	Game* myGame;
 
+	float explosionDuration;
+	bool exploded;
+
+	float bulletCDMax;
+	float bulletCDCurrent;
+
+	void MovementManagement(float deltaTime) override;
+	void ShootBullet();
+	sf::Texture* txtExplosion;
 };

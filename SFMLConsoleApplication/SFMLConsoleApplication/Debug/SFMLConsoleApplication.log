@@ -1,6 +1,7 @@
 ﻿  Game.cpp
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(89,17): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(204,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(205,11): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(206,35): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(82,67): warning C4244:  'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(82,46): warning C4244:  'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(88,17): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(226,20): warning C4244:  'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(227,20): warning C4244:  'initializing': conversion from 'unsigned int' to 'float', possible loss of data
   SFMLConsoleApplication.vcxproj -> C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\Debug\SFMLConsoleApplication.exe

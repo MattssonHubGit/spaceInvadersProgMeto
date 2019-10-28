@@ -4,7 +4,7 @@
 using namespace sf;
 
 
-Entity::Entity(int iniX, int iniY, float iniRadius, std::string colId, sf::Texture* texture) :
+Entity::Entity(float iniX, float iniY, float iniRadius, std::string colId, sf::Texture* texture) :
 	posX(iniX),
 	posY(iniY),
 	radius(iniRadius),

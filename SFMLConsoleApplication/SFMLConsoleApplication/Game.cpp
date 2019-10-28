@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include "Entity.h"
 #include "SFML/Graphics.hpp"
 #include "string.h"
 #include "Bullet.h"
@@ -22,14 +23,11 @@ namespace {
 
 	//Radius
 	const int PLAYER_RADIUS = 30;
-	const int BULLET_RADIUS = 15;
 	const int ASTEROID_RADIUS = 15;
 
 	//Player
 	const float PLAYER_SPEED_BASE = 200;
 
-	//Coin
-	const float BULLET_SPEED_BASE = 150;
 
 	//Asteroids
 	const float INVADER_SPEED = 200;
@@ -53,6 +51,7 @@ Game::Game() :
 	playerTexture(LoadTextureFromPath("PlayerTexture.psd")),
 	invaderTexture(LoadTextureFromPath("InvaderTexture.psd")),
 	bulletTexture(LoadTextureFromPath("BulletTexture.psd")),
+	explosionTexture(LoadTextureFromPath("ExplosionTexture.psd")),
 	gameIsOver(false),
 	entityList(),
 	asteroidTimer(0)
@@ -72,6 +71,7 @@ Game::~Game()
 	delete playerTexture;
 	delete invaderTexture;
 	delete bulletTexture;
+	delete explosionTexture;
 }
 ;
 
@@ -79,11 +79,10 @@ Game::~Game()
 void Game::Run() 
 {
 	//Create essential entities
-	Player* player = new Player(VIDEO_MODE.width/2, VIDEO_MODE.height/2, VIDEO_MODE.width, VIDEO_MODE.height, PLAYER_RADIUS, "Player", PLAYER_SPEED_BASE, playerTexture);
-	Bullet* bullet = new Bullet(VIDEO_MODE.width / 2, 0, VIDEO_MODE.width, VIDEO_MODE.height, BULLET_RADIUS, "Coin", BULLET_SPEED_BASE, bulletTexture);
+	Player* player = new Player(VIDEO_MODE.width/2, VIDEO_MODE.height/2, VIDEO_MODE.width, VIDEO_MODE.height, PLAYER_RADIUS, "Player", PLAYER_SPEED_BASE, playerTexture, this);
+	//Bullet* bullet = new Bullet(VIDEO_MODE.width / 2, 0, VIDEO_MODE.width, VIDEO_MODE.height, BULLET_RADIUS, "Coin", BULLET_SPEED_BASE, bulletTexture);
 
 	entityList.push_back(player);
-	entityList.push_back(bullet);
 
 	//Ranomizer seed
 	srand(std::time(NULL));
@@ -123,7 +122,7 @@ void Game::Run()
 		gameWindow.display();
 
 		//End game?
-		if (CheckGameOverState(player, bullet))
+		if (CheckGameOverState(player))
 		{
 			gameIsOver = true;
 		}
@@ -146,18 +145,18 @@ Texture* Game::LoadTextureFromPath(string path)
 //Update entities (OBS - not based on deltaTime)
 void Game::EntityUpdate(float deltaTime)
 {
-	for each (Entity* ent in entityList)
+	for (EntityVector::size_type i = 0; i < entityList.size(); i++)
 	{
-		ent->Update(deltaTime);
+		entityList[i]->Update(deltaTime);
 	}
 }
 
 //Render entities
 void Game::EntityRender()
 {
-	for each (Entity* ent in entityList)
+	for (EntityVector::size_type i = 0; i < entityList.size(); i++)
 	{
-		ent->Render(gameWindow);
+		entityList[i]->Render(gameWindow);
 	}
 }
 
@@ -202,8 +201,8 @@ void Game::CollisionManagement()
 		for (EntityVector::size_type j = i + 1; j < entityList.size(); j++) 
 		{
 			//Pythagora
-			int dx = (entityList[i]->posX - entityList[j]->posX);
-			int dy = (entityList[i]->posY - entityList[j]->posY);
+			float dx = (entityList[i]->posX - entityList[j]->posX);
+			float dy = (entityList[i]->posY - entityList[j]->posY);
 			float distance = powf((dx * dx + dy * dy), 0.5);
 
 			if (distance < (entityList[i]->radius + entityList[j]->radius)) 
@@ -224,15 +223,15 @@ void Game::InvaderSpawner(float deltaTime)
 		asteroidTimer = 0;
 	
 		//Spawn a asteroid above window at random X,Y
-		int _spawnPosX = rand() % (VIDEO_MODE.width - ASTEROID_RADIUS) + ASTEROID_RADIUS;
-		int _spawnPosY = (0 - ASTEROID_RADIUS) - VIDEO_MODE.height;
+		float _spawnPosX = rand() % (VIDEO_MODE.width - ASTEROID_RADIUS) + ASTEROID_RADIUS;
+		float _spawnPosY = (0 - ASTEROID_RADIUS) - VIDEO_MODE.height;
 
 		int _boundryX = VIDEO_MODE.width + ASTEROID_RADIUS;
 		int _boundryY = VIDEO_MODE.height + ASTEROID_RADIUS;
 
 		float _speed = INVADER_SPEED;
 
-		Invader* _invader = new Invader(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Invader", _speed, invaderTexture);
+		Invader* _invader = new Invader(_spawnPosX, _spawnPosY, _boundryX, _boundryY, ASTEROID_RADIUS, "Invader", _speed, invaderTexture, explosionTexture, this);
 
 
 		entityList.push_back(_invader);
@@ -247,11 +246,11 @@ void Game::InvaderSpawner(float deltaTime)
 }
 
 //Returns true if the game should end (player or coin is dead)
-bool Game::CheckGameOverState(Player* plyr, Bullet* cn) 
+bool Game::CheckGameOverState(Entity* plyr) 
 {
 	bool _output = false;
 
-	if (plyr->markedDead || cn->markedDead) 
+	if (plyr->markedDead) 
 	{
 		_output = true;
 	}
@@ -259,14 +258,7 @@ bool Game::CheckGameOverState(Player* plyr, Bullet* cn)
 	return _output;
 }
 
-//When hitting space, spawn 3 bullets on the player
-void Game::PlayerBulletHandler(Player* plyr) 
+void Game::AddEntity(Entity* entToAdd) 
 {
-
-}
-
-//Peroidically fire a bullet from each Invader
-void Game::InvaderBulletHandler() 
-{
-
+	entityList.push_back(entToAdd);
 }

@@ -1,11 +1,12 @@
 #pragma once
+#include "Game.h"
 #include <string>
 #include "SFML/Graphics.hpp"
 
 class Entity
 {
 public: 
-	Entity(int iniX, int iniY, float iniRadius, std::string colId, sf::Texture* texture);
+	Entity(float iniX, float iniY, float iniRadius, std::string colId, sf::Texture* texture);
 	~Entity();
 	float posX;
 	float posY;

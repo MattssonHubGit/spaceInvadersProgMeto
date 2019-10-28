@@ -1,11 +1,10 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Entity.h"
 #include <vector>
-#include "Player.h"
-#include "Bullet.h"
+class Entity;
 
 typedef std::vector<Entity*> EntityVector;
+
 
 class Game
 {
@@ -13,9 +12,12 @@ public:
 	Game();
 	~Game();
 	void Run();
+	void AddEntity(Entity* entToAdd);
+
+	sf::Texture* bulletTexture;
 
 private:
-	bool CheckGameOverState(Player* plyr, Bullet* cn);
+	bool CheckGameOverState(Entity* plyr);
 	void CollisionManagement();
 	void InvaderSpawner(float deltaTime);
 	void EntityUpdate(float deltaTime);
@@ -26,14 +28,11 @@ private:
 
 	sf::Texture* playerTexture;
 	sf::Texture* invaderTexture;
-	sf::Texture* bulletTexture;
+	sf::Texture* explosionTexture;
 
 	sf::RenderWindow gameWindow;
 	bool gameIsOver;
 	float asteroidTimer;
 
 	EntityVector entityList;
-
-	void PlayerBulletHandler(Player* plyr);
-	void InvaderBulletHandler();
 };

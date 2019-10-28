@@ -1,15 +1,19 @@
 #pragma once
 #include "Player.h"
+#include "Bullet.h"
 #include "SFML/Graphics.hpp"
 
 using namespace sf;
 using namespace std;
 
-Player::Player(int iniX, int iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
+Player::Player(float iniX, float iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture, Game* game) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = boundX;
 	boundryY = boundY;
+	bulletCDCurrnet = 0;
+	bulletCDMax = 0.5;
+	myGame = game;
 	ReadyGFX(texture);
 };
 
@@ -21,6 +25,11 @@ Player::~Player()
 void Player::OnCollision(std::string CollisionId) 
 {
 	if (CollisionId == "Invader") 
+	{
+		markedDead = true;
+	}
+
+	if (CollisionId == "InvaderBullet")
 	{
 		markedDead = true;
 	}
@@ -71,6 +80,37 @@ void Player::MovementManagement(float deltaTime)
 void Player::Update(float deltaTime)
 {
 	MovementManagement(deltaTime);
+
+	if (bulletCDCurrnet <= 0)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			ShootBullets();
+		}
+	}
+	else 
+	{
+		bulletCDCurrnet -= deltaTime;
+	}
+
+}
+
+void Player::ShootBullets() 
+{
+	bulletCDCurrnet = bulletCDMax;
+
+	float _bulletSpeed = 350;
+	float _bulletRadius = 5;
+
+	Entity* _bulletRight = new Bullet(posX, posY, boundryX, boundryY, _bulletRadius, 0.5, -1, "PlayerBullet", _bulletSpeed, myGame->bulletTexture);
+	Entity* _bulletMiddle = new Bullet(posX, posY, boundryX, boundryY, _bulletRadius, 0, -1, "PlayerBullet", _bulletSpeed, myGame->bulletTexture);
+	Entity* _bulletLeft = new Bullet(posX, posY, boundryX, boundryY, _bulletRadius, -0.5, -1, "PlayerBullet", _bulletSpeed, myGame->bulletTexture);
+
+	myGame->AddEntity(_bulletRight);
+	myGame->AddEntity(_bulletMiddle);
+	myGame->AddEntity(_bulletLeft);
+
+
 }
 
 

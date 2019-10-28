@@ -5,13 +5,14 @@
 using namespace sf;
 using namespace std;
 
-Bullet::Bullet(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
+Bullet::Bullet(float iniX, float iniY, int iniBoundryX, int iniBoundryY, float iniRad, float iniDirX, float iniDirY, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = iniBoundryX;
 	boundryY = iniBoundryY;
 	taken = false;
-	dirY = 1; //1 == down, -1 == up
+	dirX = iniDirX;
+	dirY = iniDirY;
 };
 
 Bullet::~Bullet()
@@ -24,12 +25,20 @@ void Bullet::MovementManagement(float deltaTime)
 	//Move downwards
 	//If below bottom while taken == false, coin dies (game ends)
 
-	int _dirY = dirY;
+	float _dirY = dirY;
+	float _dirX = dirX;
 
 	posY += (_dirY * moveSpeed) * deltaTime;
+	posX += (_dirX * moveSpeed) * deltaTime;
+
 	mySprite->setPosition(posX, posY);
 
 	if (posY > (boundryY + radius)) 
+	{
+		markedDead = true;
+	}
+
+	if (posY < (0 + radius))
 	{
 		markedDead = true;
 	}
@@ -37,19 +46,15 @@ void Bullet::MovementManagement(float deltaTime)
 
 void Bullet::OnCollision(std::string CollisionId)
 {
-	//If hit by player, teleport to new position on top of screen
-	if (CollisionId == "Player") 
+	if (this->CollisionId == "PlayerBullet" && CollisionId == "Invader")
 	{
-		markedDead = false;
-		Teleport();
+		markedDead = true;
+	}	
+	
+	if (this->CollisionId == "InvaderBullet" && CollisionId == "Player")
+	{
+		markedDead = true;
 	}
-}
-
-
-void Bullet::Teleport()
-{
-	posX = (rand() % (int)(boundryX - (radius / 2)));
-	posY = (0 - (radius / 2) - boundryY);
 }
 
 void Bullet::Update(float deltaTime)
