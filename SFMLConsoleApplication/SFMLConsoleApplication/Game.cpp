@@ -30,9 +30,9 @@ namespace {
 
 
 	//Asteroids
-	const float INVADER_SPEED = 200;
+	const float INVADER_SPEED = 50;
 	float invader_spawn_rate = 1;
-	const float INVADER_ACCELERATION_RATE = 0.1f;
+	const float INVADER_ACCELERATION_RATE = 0.01f;
 	const float INVADER_SPAWN_RATE_MAX = 20/2;
 }
 #pragma endregion
@@ -207,8 +207,8 @@ void Game::CollisionManagement()
 
 			if (distance < (entityList[i]->radius + entityList[j]->radius)) 
 			{
-				entityList[i]->OnCollision(entityList[j]->CollisionId);
-				entityList[j]->OnCollision(entityList[i]->CollisionId);
+				entityList[i]->OnCollision(entityList[j]->myCollisionID);
+				entityList[j]->OnCollision(entityList[i]->myCollisionID);
 			}
 		}
 	}
@@ -224,7 +224,7 @@ void Game::InvaderSpawner(float deltaTime)
 	
 		//Spawn a asteroid above window at random X,Y
 		float _spawnPosX = rand() % (VIDEO_MODE.width - ASTEROID_RADIUS) + ASTEROID_RADIUS;
-		float _spawnPosY = (0 - ASTEROID_RADIUS) - VIDEO_MODE.height;
+		float _spawnPosY = -20;/*(0 - ASTEROID_RADIUS) - VIDEO_MODE.height;*/
 
 		int _boundryX = VIDEO_MODE.width + ASTEROID_RADIUS;
 		int _boundryY = VIDEO_MODE.height + ASTEROID_RADIUS;

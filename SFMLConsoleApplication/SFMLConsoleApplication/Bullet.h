@@ -5,7 +5,7 @@
 class Bullet : public Entity 
 {
 public: 
-	Bullet(float iniX, float iniY, int iniBoundryX, int iniBoundryY, float iniRad, float dirX, float dirY, std::string colId, float speed, sf::Texture* texture);
+	Bullet(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, float dirX, float dirY, std::string colId, float speed, sf::Texture* texture);
 	~Bullet();
 	void OnCollision(std::string CollisionId) override;
 	void Update(float deltaTime) override;

@@ -4,11 +4,11 @@
 using namespace sf;
 
 
-Entity::Entity(float iniX, float iniY, float iniRadius, std::string colId, sf::Texture* texture) :
+Entity::Entity(int iniX, int iniY, float iniRadius, std::string colId, sf::Texture* texture) :
 	posX(iniX),
 	posY(iniY),
 	radius(iniRadius),
-	CollisionId(colId),
+	myCollisionID(colId),
 	markedDead(false)
 {
 	ReadyGFX(texture);

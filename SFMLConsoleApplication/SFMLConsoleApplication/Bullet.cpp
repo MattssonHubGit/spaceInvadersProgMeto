@@ -5,7 +5,7 @@
 using namespace sf;
 using namespace std;
 
-Bullet::Bullet(float iniX, float iniY, int iniBoundryX, int iniBoundryY, float iniRad, float iniDirX, float iniDirY, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
+Bullet::Bullet(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, float iniDirX, float iniDirY, std::string colId, float speed, sf::Texture* texture) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = iniBoundryX;
@@ -46,12 +46,12 @@ void Bullet::MovementManagement(float deltaTime)
 
 void Bullet::OnCollision(std::string CollisionId)
 {
-	if (this->CollisionId == "PlayerBullet" && CollisionId == "Invader")
+	if (this->myCollisionID == "PlayerBullet" && CollisionId == "Invader")
 	{
 		markedDead = true;
 	}	
 	
-	if (this->CollisionId == "InvaderBullet" && CollisionId == "Player")
+	if (this->myCollisionID == "InvaderBullet" && CollisionId == "Player")
 	{
 		markedDead = true;
 	}

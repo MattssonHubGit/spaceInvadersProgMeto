@@ -1,7 +1,22 @@
-﻿  Game.cpp
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(82,67): warning C4244:  'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(82,46): warning C4244:  'argument': conversion from 'unsigned int' to 'float', possible loss of data
+﻿  Bullet.cpp
+  Entity.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Entity.cpp(8,6): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Entity.cpp(9,6): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(88,17): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(226,20): warning C4244:  'initializing': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(227,20): warning C4244:  'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(234,47): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+  Invader.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Game.cpp(234,35): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Invader.cpp(13,25): warning C4305:  '=': truncation from 'double' to 'float'
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Invader.cpp(111,37): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Invader.cpp(111,31): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(105,42): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(105,36): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(106,43): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(106,37): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(107,41): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\SFMLConsoleApplication\Player.cpp(107,35): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
   SFMLConsoleApplication.vcxproj -> C:\Potatis INF\Skola\Högskola DVSUG\Progmetodik\SpaceInvaders\SFMLConsoleApplication\Debug\SFMLConsoleApplication.exe

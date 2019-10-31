@@ -6,7 +6,7 @@
 using namespace sf;
 using namespace std;
 
-Player::Player(float iniX, float iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture, Game* game) : Entity(iniX, iniY, iniRad, colId, texture)
+Player::Player(int iniX, int iniY, int boundX, int boundY, float iniRad, std::string colId, float speed, Texture* texture, Game* game) : Entity(iniX, iniY, iniRad, colId, texture)
 {
 	moveSpeed = speed;
 	boundryX = boundX;

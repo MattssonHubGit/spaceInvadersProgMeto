@@ -6,13 +6,13 @@
 class Entity
 {
 public: 
-	Entity(float iniX, float iniY, float iniRadius, std::string colId, sf::Texture* texture);
+	Entity(int iniX, int iniY, float iniRadius, std::string colId, sf::Texture* texture);
 	~Entity();
 	float posX;
 	float posY;
 	float radius;
 	bool markedDead;
-	std::string CollisionId;
+	std::string myCollisionID;
 	virtual void OnCollision(std::string CollisionId) = 0;
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render(sf::RenderWindow &renderWindow);

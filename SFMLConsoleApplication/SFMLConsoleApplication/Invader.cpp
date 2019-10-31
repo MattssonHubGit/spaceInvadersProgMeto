@@ -1,8 +1,9 @@
 #pragma once
 #include "Invader.h"
 #include "Bullet.h"
+#include <iostream>
 
-Invader::Invader(float iniX, float iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* textureDefault, sf::Texture* textureExplosion, Game* game) : Entity(iniX, iniY, iniRad, colId, textureDefault)
+Invader::Invader(int iniX, int iniY, int iniBoundryX, int iniBoundryY, float iniRad, std::string colId, float speed, sf::Texture* textureDefault, sf::Texture* textureExplosion, Game* game) : Entity(iniX, iniY, iniRad, colId, textureDefault)
 {
 	moveSpeed = speed;
 	boundryX = iniBoundryX;
@@ -23,6 +24,7 @@ Invader::~Invader()
 {
 	UnloadGFX();
 	delete txtExplosion;
+	std::cout << "deallocated" << std::endl;
 }
 
 void Invader::MovementManagement(float deltaTime) 
@@ -42,11 +44,13 @@ void Invader::MovementManagement(float deltaTime)
 	//Apply movement
 	posY += (_dirY * moveSpeed) * deltaTime;
 	posX += (_dirX * moveSpeed) * deltaTime;
+	std::cout << posX << ", " << posY << std::endl;
 	mySprite->setPosition(posX, posY);
 
 	//Check below screen
-	if (posY > (boundryY + (radius / 2)))
+	if ((posY > (boundryY + (radius / 2))) && myCollisionID != "Exploded")
 	{
+		std::cout << "Below screen" << std::endl;
 		markedDead = true;
 	}
 }
@@ -68,6 +72,8 @@ void Invader::Update(float deltaTime)
 	//If exploded, remove after timer
 	if (exploded)
 	{
+		std::cout << "EXPLODED!" << std::endl;
+
 		if (explosionDuration <= 0)
 		{
 			markedDead = true;
@@ -82,9 +88,13 @@ void Invader::Update(float deltaTime)
 
 void Invader::OnCollision(std::string CollisionId) 
 {
+
+	std::cout << CollisionId << std::endl;
+
 	if (CollisionId == "PlayerBullet")
 	{
-		CollisionId = "Explosion";
+		//std::cout << "Entered explosion state" << std::endl;
+		myCollisionID = "Explosion";
 		moveSpeed = 0;
 		exploded = true;
 		ReadyGFX(txtExplosion);
